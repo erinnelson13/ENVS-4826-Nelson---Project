@@ -1,0 +1,79 @@
+---
+title: "ENVS 4826 Nelson Musgrave - Project"
+author: "Erin Nelson"
+date: "02/11/2021"
+output: html_document
+---
+
+```{r, echo = FALSE, include = FALSE}
+install.packages("raster")
+install.packages("nngeo")
+library(stars)
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(RColorBrewer)
+library(ggspatial)
+library(rgeos)
+library(sp)
+library(raster)
+library (nngeo)
+
+tree_database <- read.csv("Tree_Database.csv")
+#View(tree_database)
+
+tree_database$x <- as.numeric(tree_database$x)
+
+tree_database_coord <- st_read("Tree_database.csv",
+                               options = c("X_POSSIBLE_NAMEs=x", 
+                                           "Y_POSSIBLE_NAMES=Y"),
+                               crs = 4326) 
+
+trees_wf <- filter(tree_database_coord, location == "waterfront")
+#View(trees_wf)
+
+background <- st_read("Street_Name_Routes.shp")
+st_crs (background)
+
+max(trees_wf$x)
+min(trees_wf$x)
+max(trees_wf$y)
+min(trees_wf$y)
+
+trees_wf_bbox <- st_bbox(c(xmin = -63.5750000, ymin = 44.642000, xmax = -63.566000, ymax = 44.6510000),
+                crs = st_crs(background))
+background_cropped <- st_crop(background, trees_wf_bbox)
+
+```
+
+
+
+```{r, echo = FALSE}
+
+ggplot() +
+  geom_sf(data = background_cropped) +
+  geom_sf(data = trees_wf, mapping = aes(colour = crown_condition)) +
+  xlab("Longitude") + ylab("Latitude") + 
+  ggtitle("Waterfront Trees Condition") + 
+  annotation_north_arrow(location = "bl", which_north = "true", 
+                         pad_x = unit(1, "in"), pad_y = unit(1, "in"),
+                         style = north_arrow_fancy_orienteering) +
+  theme_bw() +
+  theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+```{r}
+background_cropped = as(background_cropped,"Spatial")
+trees_wf = as(trees_wf, "Spatial")
+st_crs(trees_wf)
+?st_nn
+
+#apply(gDistance(trees_wf, background_cropped, byid = TRUE),2, min)
+
+?st_geometry
+
+nn = st_nn(trees_wf, background_cropped, k = 1, maxdist = Inf, returnDist = TRUE, progress = FALSE)
+
+
+```
+
