@@ -62,18 +62,4 @@ ggplot() +
   theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
-```{r}
-background_cropped = as(background_cropped,"Spatial")
-trees_wf = as(trees_wf, "Spatial")
-st_crs(trees_wf)
-?st_nn
-
-#apply(gDistance(trees_wf, background_cropped, byid = TRUE),2, min)
-
-?st_geometry
-
-nn = st_nn(trees_wf, background_cropped, k = 1, maxdist = Inf, returnDist = TRUE, progress = FALSE)
-
-
-```
 
