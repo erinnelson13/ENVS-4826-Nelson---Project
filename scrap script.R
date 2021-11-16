@@ -49,6 +49,6 @@ View(trees_wf_bbox)
 # but you need to repeat that over all the trees using sapply
 treedist1 <- sapply(1:nrow(tree_projected), function(x) min(st_distance(streets_transform, tree_projected[x, ])))
 wf_trees <- cbind(tree_projected, treedist1)
-View(wf_trees)
 
-write.csv(wf_trees)
+trees_wf_filtered <- filter(wf_trees, location == "waterfront")
+View(trees_wf_filtered)
