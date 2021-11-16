@@ -55,3 +55,5 @@ View(trees_wf_filtered)
 
 #make continuous and get rid of fair by combining with either good or poor 
 #set G=1, set P=0, set F=0
+#recode using dyplyr 
+#set as number and not factors 
