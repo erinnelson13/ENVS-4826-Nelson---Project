@@ -53,7 +53,13 @@ wf_trees <- cbind(tree_projected, treedist1)
 trees_wf_filtered <- filter(wf_trees, location == "waterfront")
 View(trees_wf_filtered)
 
-#make continuous and get rid of fair by combining with either good or poor 
+#get rid of fair by combining with either good or poor 
 #set G=1, set P=0, set F=0
 #recode using dyplyr 
 #set as number and not factors 
+
+trees_wf_filtered$numerical_cc <- recode(trees_wf_filtered$crown_condition, G = 1, F = 0, P = 0)
+
+trees_wf_filtered$numerical_td <- recode(trees_wf_filtered$trunk_damage, N = 1, Y = 0)
+  
+View(trees_wf_filtered)
