@@ -20,12 +20,20 @@ trees.sf <- st_transform(trees.sf, crs = 32721) # transform
 
 ?st_sf
 
-bg.sf <- st_sf(id = 'L1', st_sfc(st_linestring(as.matrix(background), dim = "XY")))
-st_crs(background) <- st_crs(4326) # assign crs
-bg.sf <- st_transform(background, crs = 32721) # transform
+trees_wf_bbox <- st_bbox(c(xmin = -63.5750000, ymin = 44.642000, xmax = -63.566000, ymax = 44.6510000),
+                         crs = st_crs(background))
+background_cropped <- st_crop(background, trees_wf_bbox)
+
+bg.sf <- st_sf(id = 'L1', st_sfc(st_linestring(as.matrix(background_cropped), dim = "XY")))
+st_crs(background_cropped) <- st_crs(4326) # assign crs
+bg.sf <- st_transform(background_cropped, crs = 32721) # transform
 
 distances <- st_distance(x = trees.sf, y = bg.sf)
 print(distances)
 View(distances)
+
+trees_wf_bbox <- st_bbox(c(xmin = -63.5750000, ymin = 44.642000, xmax = -63.566000, ymax = 44.6510000),
+                         crs = st_crs(background))
+background_cropped <- st_crop(background, trees_wf_bbox)
 
 distances.filtered<- distances(!is.na(distances))
