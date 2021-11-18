@@ -1,8 +1,7 @@
+install.packages("viridis")
 library(sf)
 library(ggplot2)
 library(dplyr)
-
-
 library(stars)
 
 
@@ -53,6 +52,7 @@ wf_trees <- cbind(tree_projected, treedist1)
 trees_wf_filtered <- filter(wf_trees, location == "waterfront")
 View(trees_wf_filtered)
 
+trees_wf_filtered$trunk_damage[262] = "Y"
 
 #set as number and not factors 
 trees_wf_filtered$numerical_cc <- recode(trees_wf_filtered$crown_condition, G = 1, F = 1, P = 0)
@@ -65,12 +65,23 @@ trees_wf_filtered$numerical_td <-as.numeric(trees_wf_filtered$numerical_td)
 str(trees_wf_filtered$numerical_td)
 
 ggplot(data = trees_wf_filtered, 
-       aes(x = treedist1, y = numerical_cc)) +
+       aes(x = treedist1, y = numerical_cc, colour = crown_condition)) +
         geom_point() +
-  labs(x = "Distance from road (m)", y = "Crown condition") +
+  labs(x = "Distance from road (m)", y = "Crown condition", colour = "Crown Condition") +
   ggtitle ("Crown Condition") +
   theme_bw() +
   theme(panel.grid = element_blank()) + 
-  scale_fill_viridis(option=)
-         
+  scale_colour_manual(values = c("#FFCC00", "#00EE00", "#FF0000"), 
+                      labels = c("Fair", "Good", "Poor"))
   
+
+ggplot(data = trees_wf_filtered, 
+       aes(x = treedist1, y = numerical_td, colour = trunk_damage)) +
+  geom_point() +
+  labs(x = "Distance from road (m)", y = "Trunk damage", colour = "Trunk Damage") +
+  ggtitle ("Trunk Damage") +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  scale_colour_manual(values = c("#00EE00", "#FF0000"), 
+                      labels = c("1 = No", "0 = Yes"))
+
