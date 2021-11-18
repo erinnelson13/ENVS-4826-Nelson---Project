@@ -55,7 +55,7 @@ View(trees_wf_filtered)
 
 
 #set as number and not factors 
-trees_wf_filtered$numerical_cc <- recode(trees_wf_filtered$crown_condition, G = 1, F = 0, P = 0)
+trees_wf_filtered$numerical_cc <- recode(trees_wf_filtered$crown_condition, G = 1, F = 1, P = 0)
 trees_wf_filtered$numerical_td <- recode(trees_wf_filtered$trunk_damage, N = 1, Y = 0)
 View(trees_wf_filtered)
 
@@ -64,7 +64,13 @@ str(trees_wf_filtered$numerical_cc)
 trees_wf_filtered$numerical_td <-as.numeric(trees_wf_filtered$numerical_td)
 str(trees_wf_filtered$numerical_td)
 
-ggplot() +
-  geom_sf(data = trees_wf_filtered$treedist1) +
-  geom_st(data = trees_wf_filtered$numerical_cc)
+ggplot(data = trees_wf_filtered, 
+       aes(x = treedist1, y = numerical_cc)) +
+        geom_point() +
+  labs(x = "Distance from road (m)", y = "Crown condition") +
+  ggtitle ("Crown Condition") +
+  theme_bw() +
+  theme(panel.grid = element_blank()) + 
+  scale_fill_viridis(option=)
+         
   
