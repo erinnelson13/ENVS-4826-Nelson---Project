@@ -85,3 +85,14 @@ ggplot(data = trees_wf_filtered,
   scale_colour_manual(values = c("#00EE00", "#FF0000"), 
                       labels = c("1 = No", "0 = Yes"))
 
+cc_model <- glm(numerical_cc ~ treedist1, data = trees_wf_filtered, family = "binomial")
+summary(cc_model)
+#Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  3.093092   0.383562   8.064 7.38e-16 ***
+#  treedist1   -0.006980   0.006989  -0.999    0.318  
+
+td_model <- glm(numerical_td ~ treedist1, data = trees_wf_filtered, family = "binomial")
+summary(td_model)
+#              Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)  1.3947463  0.2076393   6.717 1.85e-11 ***
+#  treedist1   -0.0009688  0.0042058  -0.230    0.818   
