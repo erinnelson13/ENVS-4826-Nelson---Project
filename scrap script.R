@@ -25,9 +25,7 @@ trees_wf_bbox <- st_bbox(c(xmin = -63.5750000, ymin = 44.642000, xmax = -63.5660
                          crs = st_crs(background))
 background_cropped <- st_crop(background, trees_wf_bbox)
 
-trees_wf_bbox <- st_bbox(c(xmin = -63.5750000, ymin = 44.642000, xmax = -63.566000, ymax = 44.6510000),
-                         crs = st_crs(background))
-background_cropped <- st_crop(background, trees_wf_bbox)
+
 
 
 #load vector data
