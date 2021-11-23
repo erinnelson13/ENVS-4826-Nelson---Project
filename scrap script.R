@@ -67,6 +67,8 @@ str(trees_wf_filtered$numerical_td)
 ggplot(data = trees_wf_filtered, 
        aes(x = treedist1, y = numerical_cc, colour = crown_condition)) +
         geom_point() +
+  geom_smooth(method = "glm", se = FALSE, color = "black",
+              method.args = list(family = "binomial")) +
   labs(x = "Distance from road (m)", y = "Crown condition", colour = "Crown Condition") +
   ggtitle ("Crown Condition") +
   theme_bw() +
@@ -78,6 +80,8 @@ ggplot(data = trees_wf_filtered,
 ggplot(data = trees_wf_filtered, 
        aes(x = treedist1, y = numerical_td, colour = trunk_damage)) +
   geom_point() +
+  geom_smooth(method = "glm", se = FALSE, color = "black",
+              method.args = list(family = "binomial")) +
   labs(x = "Distance from road (m)", y = "Trunk damage", colour = "Trunk Damage") +
   ggtitle ("Trunk Damage") +
   theme_bw() +
