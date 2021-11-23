@@ -100,3 +100,14 @@ summary(td_model)
 #              Estimate Std. Error z value Pr(>|z|)    
 #(Intercept)  1.3947463  0.2076393   6.717 1.85e-11 ***
 #  treedist1   -0.0009688  0.0042058  -0.230    0.818   
+
+library(generalhoslem)
+
+logitgof(trees_wf_filtered$numerical_cc, fitted(cc_model), g = 10)
+#data:  trees_wf_filtered$numerical_cc, fitted(cc_model)
+#X-squared = 4.0291, df = 8, p-value = 0.8545
+
+logitgof(trees_wf_filtered$numerical_td, fitted(td_model), g = 10)
+#data:  trees_wf_filtered$numerical_td, fitted(td_model)
+#X-squared = 19.223, df = 8, p-value = 0.01371
+
