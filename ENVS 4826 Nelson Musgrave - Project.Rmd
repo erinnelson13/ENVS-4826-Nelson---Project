@@ -12,6 +12,8 @@ Trees and other vegetation provide a wide range of benefits to urban settings. S
 While it is possible that a few of these trees grew naturally, and were developed around, the majority of these trees have been planted and maintained over the course of their life. While it’s known that trees are beneficial for reducing pollution in urban settings (Guidolotti et al., 2016) , our question is whether pollution has a negative impact on tree health and growth. More specifically, we are going to analyse whether trees in closer proximity to the road have a negative impact on their health. The World Health Organization listed road pollutants as one major source of air pollutants globally, affecting both humans and local ecological systems (Aggarwal & Jain, 2015). While pollutants are a concern for trees near roads there is also the danger of physical damage to trees due to high traffic.  We will look at these issues by comparing trees near roads to those that are not. We hypothesize that the trees near roads will be in less healthy conditions with respect to crown coverage, trunk damage, and leaf health.
 
 ## Methods
+Field Data Collection
+
 Data was collected by all class participants with the aid of our professor, Dr. Erin Cameron and teacher assistants, Tyler and Madi. All trees that belonged to the HRM at the waterfront had their data collected. Our boundaries for data collection were north of the Halifax Seaport Market, south of the Marriott Hotel, and Barrington Street to the water. Trees on privately managed patios were not included in our study. The parameters can be seen in Figure 1.
 
 ![Figure 1: Example of table format used for data collection](example_table_cropped.png)
@@ -22,7 +24,8 @@ Each tree’s trunk was measured using a DBH tape at breast height (4.3 ft) abov
 
 When noting the location of trees, an app on a tablet called “Field Maps” (ESRI, 2021) was used to reference the trees we were looking at. A map layer created previously was available for us to view. Due to this we were able to cross reference what trees we were looking at spatially. All the data was recorded on paper. When field work was complete, the class had gathered data for 352 trees. The data was then put into a collaborative Google Docs sheet to clean up any mistakes that were noted and to ensure the data from both groups was consistent.
 
-## Data Analysis 
+Data Analysis 
+
 To begin our analysis, we converted the “x” column, representing longitude coordinates, from the dataframe “tree_data”, from characters to numerical values. The “y” column, representing the latitude coordinates, was already presented in numerical values. These numerical values were then assigned the WGS 84 coordinate reference system. 
 EXPLAIN MAP INSTRUCTIONS??
 A data frame created by Greg Baker, named “gregtrees” (CITE), with the desired coordinate reference system for the analysis, being measured in meters, was used. We inserted the data frame into the program and transformed the tree data to mimic the reference used within Greg’s data. 

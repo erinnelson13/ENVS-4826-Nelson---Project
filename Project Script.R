@@ -11,7 +11,7 @@ background <- st_read("Street_Name_Routes.shp")
 
 tree_data <- read.csv("CorrectedData_ENVS4826.csv")
 tree_data$x <- as.numeric(tree_data$x)
-str(tree_data$x)
+
 
 tree_database_coord <- st_read("Tree_database.csv",
                                options = c("X_POSSIBLE_NAMEs=x", 
@@ -20,6 +20,7 @@ tree_database_coord <- st_read("Tree_database.csv",
 
 trees_wf <- filter(tree_database_coord, location == "waterfront")
 
+#Retrieving parameters for bbox
 max(trees_wf$x)
 min(trees_wf$x)
 max(trees_wf$y)
@@ -56,10 +57,9 @@ ggplot() +
 #Setting up for graphs and analysis
 greg<-st_read("gregtrees.shp")
 tree_projected <- st_transform(trees_wf,st_crs(greg))
-st_crs(tree_projected)
+
 
 streets_transform <- st_transform(background_cropped, st_crs(greg))
-st_crs(streets_transform)
 
 
 
