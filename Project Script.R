@@ -38,9 +38,12 @@ ggplot() +
   theme_bw() +
   theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
+#Correcting error in data
+trees_wf$trunk_damage[262] = "Y"
+
 ggplot() +
   geom_sf(data = background_cropped) +
-  geom_sf(data = trees_wf_filtered, mapping = aes(colour = trunk_damage)) +
+  geom_sf(data = trees_wf, mapping = aes(colour = trunk_damage)) +
   labs(x = "Longitude", y = "Latitude", colour = "Trunk Damage") + 
   ggtitle("Waterfront Trees Trunk Damage") + 
   annotation_north_arrow(location = "bl", which_north = "true", 
@@ -65,7 +68,6 @@ wf_trees <- cbind(tree_projected, treedist1)
 trees_wf_filtered <- filter(wf_trees, location == "waterfront")
 View(trees_wf_filtered)
 
-trees_wf_filtered$trunk_damage[262] = "Y"
 
 
 trees_wf_filtered$numerical_cc <- recode(trees_wf_filtered$crown_condition, G = 1, F = 1, P = 0)
