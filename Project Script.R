@@ -66,16 +66,15 @@ treedist1 <- sapply(1:nrow(tree_projected), function(x) min(st_distance(streets_
 wf_trees <- cbind(tree_projected, treedist1)
 
 trees_wf_filtered <- filter(wf_trees, location == "waterfront")
-View(trees_wf_filtered)
 
 
 
 trees_wf_filtered$numerical_cc <- recode(trees_wf_filtered$crown_condition, G = 1, F = 1, P = 0)
 trees_wf_filtered$numerical_td <- recode(trees_wf_filtered$trunk_damage, N = 1, Y = 0)
-View(trees_wf_filtered)
+
 
 trees_wf_filtered$numerical_cc <- as.numeric(trees_wf_filtered$numerical_cc)
-str(trees_wf_filtered$numerical_cc)
+
 trees_wf_filtered$numerical_td <-as.numeric(trees_wf_filtered$numerical_td)
 
 
