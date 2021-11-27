@@ -9,11 +9,7 @@ library(generalhoslem)
 #Setting up for maps
 background <- st_read("Street_Name_Routes.shp")
 
-tree_data <- read.csv("CorrectedData_ENVS4826.csv")
-tree_data$x <- as.numeric(tree_data$x)
-
-
-tree_database_coord <- st_read("Tree_database.csv",
+tree_database_coord <- st_read("CorrectedData_ENVS4826.csv",
                                options = c("X_POSSIBLE_NAMEs=x", 
                                            "Y_POSSIBLE_NAMES=Y"),
                                crs = 4326) 
