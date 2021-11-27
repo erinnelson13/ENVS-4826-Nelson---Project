@@ -63,9 +63,7 @@ streets_transform <- st_transform(background_cropped, st_crs(greg))
 
 
 treedist1 <- sapply(1:nrow(tree_projected), function(x) min(st_distance(streets_transform, tree_projected[x, ])))
-wf_trees <- cbind(tree_projected, treedist1)
-
-trees_wf_filtered <- filter(wf_trees, location == "waterfront")
+trees_wf_filtered <- cbind(tree_projected, treedist1)
 
 
 
