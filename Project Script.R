@@ -1,3 +1,5 @@
+#ENVS 4826 Project
+#Mairi-Jo Musgrave A00407737 & Erin Nelson A00419820
 library(sf)
 library(ggplot2)
 library(dplyr)
