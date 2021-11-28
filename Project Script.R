@@ -112,4 +112,3 @@ summary(td_model)
 logitgof(trees_wf_filtered$numerical_cc, fitted(cc_model), g = 10)
 
 logitgof(trees_wf_filtered$numerical_td, fitted(td_model), g = 10)
-

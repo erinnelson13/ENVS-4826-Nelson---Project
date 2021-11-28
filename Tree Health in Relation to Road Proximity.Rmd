@@ -1,7 +1,7 @@
 ---
-title: "ENVS 4826 Nelson Musgrave - Project"
-author: "Erin Nelson"
-date: "02/11/2021"
+title: "Tree Health in Relation to Road Proximity"
+author: "Erin Nelson and Mairi-Jo Musgrave"
+date: "08/12/2021"
 output:
   html_document: default
   pdf_document: default
