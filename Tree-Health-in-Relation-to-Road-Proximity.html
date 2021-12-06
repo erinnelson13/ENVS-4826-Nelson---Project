@@ -11,7 +11,7 @@
 
 <meta name="author" content="Erin Nelson and Mairi-Jo Musgrave" />
 
-<meta name="date" content="2021-02-11" />
+<meta name="date" content="2021-08-12" />
 
 <title>Tree Health in Relation to Road Proximity</title>
 
@@ -167,7 +167,7 @@ pre code {
 
 <h1 class="title toc-ignore">Tree Health in Relation to Road Proximity</h1>
 <h4 class="author">Erin Nelson and Mairi-Jo Musgrave</h4>
-<h4 class="date">02/11/2021</h4>
+<h4 class="date">08/12/2021</h4>
 
 </div>
 
@@ -187,8 +187,7 @@ pre code {
 </div>
 <p>Each tree’s trunk was measured using a DBH tape at breast height (4.3 ft) above ground level). This measurement was recorded as the diameter of the trunk. If the trunk had multiple branches greater than 2 cm at breast height, these measurements were recorded in the notes section. Trunk damage was noted if there was any - simply by walking around the tree and examining the trunk. The crown condition was also examined and given a value of good, fair, or poor. The crown condition was measured on a basis of the amount of leaves on the branches. If there were any disease, galls, die-back, or insect damage on the leaves, or if branches were missing, it was written down in the notes. The species of trees were identified in the field by either prior knowledge of certain tree characteristics, or by referencing the book Trees in Canada (Farrar, 2016). Only their four-letter species ID was recorded. This species ID is denoted by the first two letters of the genus, followed by the first two letters of the species. An example of this is ACRU, which represents the Acer rubrum, more commonly known as the red maple tree. If the tree was tethered, that was also recorded in the notes.</p>
 <p>When noting the location of trees, an app on a tablet called “Field Maps” (ESRI, 2021) was used to reference the trees we were looking at. A map layer created previously was available for us to view. Due to this we were able to cross reference what trees we were looking at spatially. All the data was recorded on paper. When field work was complete, the class had gathered data for 352 trees. The data was then put into a collaborative Google Docs sheet to clean up any mistakes that were noted and to ensure the data from both groups was consistent.</p>
-<p>Data Analysis</p>
-<p>To begin our analysis, we converted the “x” column, representing longitude coordinates, from the dataframe “tree_data”, from characters to numerical values. The “y” column, representing the latitude coordinates, was already presented in numerical values. These numerical values were then assigned the WGS 84 coordinate reference system. EXPLAIN MAP INSTRUCTIONS?? A data frame created by Greg Baker, named “gregtrees” (CITE), with the desired coordinate reference system for the analysis, being measured in meters, was used. We inserted the data frame into the program and transformed the tree data to mimic the reference used within Greg’s data. The data was filtered to isolate the trees at the Halifax Waterfront.</p>
+<p>Data Analysis A map was created to allow visualization of the data in relation to the physical environment. The package entitled “sf” was loaded. A shape file named “Street_Name_Routes.shp” (Erin) was also loaded and showed the street routes near the waterfront. From there, loading the data collected by the class from the csv file entitled “CorrectedData_ENVS4826.csv” was done. Simultaneously, assigning the columns containing the coordinate data the same as the street routes shape file was completed. Next, we filtered the data to include only those collected at the waterfront using the package “dplyr”. A boundary box was created, with coordinates slightly exceeding the minimum and maximum coordinates from the tree data, and was then cropped to the background of the box. We then proceeded by loading the package called “ggplot2” and creating two maps of the background and tree locations, one coloured by crown condition and the other by trunk damage. It was necessary to correct an error in the data as one “y” instead of “Y”, before creating the map coloured by trunk damage. To set up the data for graphs and analysis, we loaded a shape file entitled “gregtrees.shp” to use as a reference to change the coordinate system of the tree data and background to NAD83 which operates in units of meters. The distance for every tree from the nearest road based on the background street data and added the distances into the data frame in a new column was then noted. From there, we created a new column where we reassigned the crown condition value “G” and “F” the number 1, and “P” the number 0. Similarly we created a column to assign trunk condition value “N” the number 1 and “Y” the value 0. We then reassigned the two new columns to a numeric structure. A graph was then created using the tree distances from the nearest road as the x-axis and the reassigned values for crown condition as the y-axis and coloured the points by original crown condition values. We then repeated this process using trunk damage for another graph. Two proportion generalised linear models were then ran. Both models contained tree distance from the nearest road as the x value. However, one used the numerical values of crown condition as the x value, while the other used the numerical values of trunk damage as the x value. Finally we conducted a Hosmer Lemeshow test for each of the models.</p>
 </div>
 
 
