@@ -5,6 +5,7 @@ library(ggplot2)
 library(dplyr)
 library(ggspatial)
 library(generalhoslem)
+library(viridis)
 
 #Setting up for maps
 background <- st_read("Street_Name_Routes.shp")
@@ -32,11 +33,14 @@ ggplot() +
   geom_sf(data = trees_wf, mapping = aes(colour = crown_condition)) +
   labs(x = "Longitude", y = "Latitude", colour = "Crown Condition") + 
   ggtitle("Waterfront Trees Crown Condition") + 
+  scale_colour_manual(values = c("#330066", "#009999", "#FFFF00"), 
+                      labels = c("Fair", "Good", "Poor")) +
   annotation_north_arrow(location = "bl", which_north = "true", 
                          pad_x = unit(1, "in"), pad_y = unit(1, "in"),
                          style = north_arrow_fancy_orienteering) +
   theme_bw() +
   theme(panel.grid = element_blank(), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
 
 #Correcting error in data
 trees_wf$trunk_damage[262] = "Y"
@@ -46,6 +50,8 @@ ggplot() +
   geom_sf(data = trees_wf, mapping = aes(colour = trunk_damage)) +
   labs(x = "Longitude", y = "Latitude", colour = "Trunk Damage") + 
   ggtitle("Waterfront Trees Trunk Damage") + 
+  scale_colour_manual(values = c("#330066", "#FFFF00"), 
+                      labels = c("No", "Yes")) +
   annotation_north_arrow(location = "bl", which_north = "true", 
                          pad_x = unit(1, "in"), pad_y = unit(1, "in"),
                          style = north_arrow_fancy_orienteering) +
@@ -86,7 +92,7 @@ ggplot(data = trees_wf_filtered,
   ggtitle ("Crown Condition") +
   theme_bw() +
   theme(panel.grid = element_blank()) + 
-  scale_colour_manual(values = c("#FFCC00", "#00EE00", "#FF0000"), 
+  scale_colour_manual(values = c("#330066", "#009999", "#FFFF00"), 
                       labels = c("Fair", "Good", "Poor"))
 ggplot(data = trees_wf_filtered, 
        aes(x = treedist1, y = numerical_td, colour = trunk_damage)) +
@@ -97,7 +103,7 @@ ggplot(data = trees_wf_filtered,
   ggtitle ("Trunk Damage") +
   theme_bw() +
   theme(panel.grid = element_blank()) +
-  scale_colour_manual(values = c("#00EE00", "#FF0000"), 
+  scale_colour_manual(values = c("#330066", "#FFFF00"), 
                       labels = c("1 = No", "0 = Yes"))
 
 #Analysis model
