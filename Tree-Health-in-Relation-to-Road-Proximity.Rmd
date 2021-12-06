@@ -30,7 +30,7 @@ Data Analysis
 To set up the data for graphs and analysis, we loaded a shape file entitled “gregtrees.shp”, provided  by Greg Baker from the Department of Geology at Saint Mary's University,  to use as a reference to change the coordinate system of the tree data and background to NAD83 which operates in units of meters. The distance for every tree from the nearest road based on the background street data and added the distances into the data frame in a new column was then noted. From there, we created a new column where we reassigned the crown condition value “G”  and “F” the number 1, and “P” the number 0. Similarly we created a column to assign trunk condition value “N” the number 1 and “Y” the value 0. We then reassigned the two new columns to a numeric structure. A graph was then created using the tree distances from the nearest road as the x-axis and the reassigned values for crown condition as the y-axis and coloured the points by original crown condition values. We then repeated this process using trunk damage for another graph. 
 Two proportion generalised linear models were then ran. Both models contained tree distance from the nearest road as the x value. However, one used the numerical values of crown condition as the x value, while the other used the  numerical values of trunk damage as the x value. Finally we conducted a Hosmer Lemeshow test for each of the models. 
 
-Results
+## Results
 	The maps that were created showed tree conditions (crown condition and trunk damage) and where they were located along the Halifax waterfront. By looking at the map showing crown condition, the “G” meaning good crown condition, seems the most common (Figure 2). As for the map showing trunk damage, “N” meaning no damage, seems the most common (Figure 3). No other patterns are noted within these maps. 
 
 
@@ -141,3 +141,14 @@ ggplot(data = trees_wf_filtered,
 Figure 5: A plot recording trunk damage of trees found at the Halifax waterfront in comparison to the nearest road distance.
 
 The Pr(>|z|) value, which represents the p-value for our parameter “treedist1” when using crown condition data, is 0.318 (Figure 6). When using “treedist1” with trunk damage data, the p-value is shown as 0.818 (Figure 7). 
+
+![Figure 6: Data outputs from the generalized linear model comparing road distances to crown conditions of trees located on the Halifax waterfront](Summary_Crown_Condition.png)
+![Figure 7: Data outputs from the generalized linear model comparing road distances to trunk damage of trees located on the Halifax waterfront](summary_trunk_damage.png)
+The Hosmer and Lemeshow test shows that for both crown condition and trunk damage of trees that the the values are insignificant. The values found by running these tests were 0.8545 and 0.01371, respectively (Figure 8; Figure 9). 
+
+![Figure 8: Hosmer and Lemeshow test for crown conditions of trees compared to nearest distance from road](crown_condition_hosmer.png)
+![Figure 9: Hosmer and Lemeshow test for crown conditions of trees compared to nearest distance from road](trunk_damage_hosmer.png)
+## Discussion
+The data collected does not support our hypothesis that the health of a tree is related to it's distance from the nearest road. Both crown condition and trunk damage showed no correlation to the distance from the nearest road. These results could be affected by the fact that a large portion of the trees at the waterfront are in close proximity to the road. This means that there are not enough trees at a far distance from the road to make a meaningful comparison. If this analysis was repeated it would be be beneficial to regroup the data for crown condition to analyze "Good" separately from "Fair" and "Poor", rather than having "Good" and "Fair" together. This is because many of the trees were categorized as "Fair". Fair covers a wider range of crown conditions that could have potentially been a result of distance to the nearest road. Additionally, this analysis can be conducted by splitting the trees up into discrete groups based on their proximity to the nearest road, rather than analyze them on a continuous distance scale like we did. We also also could have analyzed information collected in the comment column such as diseased leaves or the presence of gulls in relation to road proximity. Finally, repeating this analysis with data collected from Saint Mary's University may have yielded different results due to the differences in the tree's spatial arrangement in relation to nearby roads. 
+
+
