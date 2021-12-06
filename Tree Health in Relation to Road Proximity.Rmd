@@ -148,7 +148,9 @@ The Hosmer and Lemeshow test shows that for both crown condition and trunk damag
 
 ![Figure 8: Hosmer and Lemeshow test for crown conditions of trees compared to nearest distance from road](crown_condition_hosmer.png)
 ![Figure 9: Hosmer and Lemeshow test for crown conditions of trees compared to nearest distance from road](trunk_damage_hosmer.png)
+
 ## Discussion
+
 The data collected does not support our hypothesis that the health of a tree is related to it's distance from the nearest road. Both crown condition and trunk damage showed no correlation to the distance from the nearest road. These results could be affected by the fact that a large portion of the trees at the waterfront are in close proximity to the road. This means that there are not enough trees at a far distance from the road to make a meaningful comparison. If this analysis was repeated it would be be beneficial to regroup the data for crown condition to analyze "Good" separately from "Fair" and "Poor", rather than having "Good" and "Fair" together. This is because many of the trees were categorized as "Fair". Fair covers a wider range of crown conditions that could have potentially been a result of distance to the nearest road. Additionally, this analysis can be conducted by splitting the trees up into discrete groups based on their proximity to the nearest road, rather than analyze them on a continuous distance scale like we did. We also also could have analyzed information collected in the comment column such as diseased leaves or the presence of gulls in relation to road proximity. Finally, repeating this analysis with data collected from Saint Mary's University may have yielded different results due to the differences in the tree's spatial arrangement in relation to nearby roads. 
 
 
