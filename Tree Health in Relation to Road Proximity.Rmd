@@ -12,7 +12,7 @@ Trees and other vegetation provide a wide range of benefits to urban settings. S
 While it is possible that a few of these trees grew naturally, and were developed around, the majority of these trees have been planted and maintained over the course of their life. While it’s known that trees are beneficial for reducing pollution in urban settings (Guidolotti et al., 2016) , our question is whether pollution has a negative impact on tree health and growth. More specifically, we are going to analyse whether trees in closer proximity to the road have a negative impact on their health. The World Health Organization listed road pollutants as one major source of air pollutants globally, affecting both humans and local ecological systems (Aggarwal & Jain, 2015). While pollutants are a concern for trees near roads there is also the danger of physical damage to trees due to high traffic.  We will look at these issues by comparing trees near roads to those that are not. We hypothesize that the trees near roads will be in less healthy conditions with respect to crown coverage, trunk damage, and leaf health.
 
 ## Methods
-Field Data Collection
+#### Field Data Collection
 
 Data was collected by all class participants with the aid of our professor, Dr. Erin Cameron and teacher assistants, Tyler and Madi. All trees that belonged to the HRM at the waterfront had their data collected. Our boundaries for data collection were north of the Halifax Seaport Market, south of the Marriott Hotel, and Barrington Street to the water. Trees on privately managed patios were not included in our study. The parameters can be seen in Figure 1.
 
@@ -24,14 +24,14 @@ Each tree’s trunk was measured using a DBH tape at breast height (4.3 ft) abov
 
 When noting the location of trees, an app on a tablet called “Field Maps” (ESRI, 2021) was used to reference the trees we were looking at. A map layer created previously was available for us to view. Due to this we were able to cross reference what trees we were looking at spatially. All the data was recorded on paper. When field work was complete, the class had gathered data for 352 trees. The data was then put into a collaborative Google Docs sheet to clean up any mistakes that were noted and to ensure the data from both groups was consistent.
 
-Data Analysis 
+#### Data Analysis 
 
-  A map was created to allow visualization of the data in relation to the physical environment.  The package entitled “sf” was loaded. A shape file named “Street_Name_Routes.shp”, provided by Erin Cameron from the Department of Environmental Science at Saint Mary's University, was also loaded and showed the street routes near the waterfront. From there, loading the data collected by the class from the csv file entitled “CorrectedData_ENVS4826.csv” was done. Simultaneously, assigning the columns containing the coordinate data the same as the street routes shape file was completed. Next, we filtered the data to include only those collected at the waterfront using the package “dplyr”. A boundary box was created, with coordinates slightly exceeding the minimum and maximum coordinates from the tree data, and was then cropped to the background of the box. We then proceeded by loading the package called “ggplot2” and creating two maps of the background and tree locations, one coloured by crown condition and the other by trunk damage. It was necessary to correct an error in the data as one “y” instead of “Y”, before creating the map coloured by trunk damage. 
+A map was created to allow visualization of the data in relation to the physical environment.  The package entitled “sf” was loaded. A shape file named “Street_Name_Routes.shp”, provided by Erin Cameron from the Department of Environmental Science at Saint Mary's University, was also loaded and showed the street routes near the waterfront. From there, loading the data collected by the class from the csv file entitled “CorrectedData_ENVS4826.csv” was done. Simultaneously, assigning the columns containing the coordinate data the same as the street routes shape file was completed. Next, we filtered the data to include only those collected at the waterfront using the package “dplyr”. A boundary box was created, with coordinates slightly exceeding the minimum and maximum coordinates from the tree data, and was then cropped to the background of the box. We then proceeded by loading the package called “ggplot2” and creating two maps of the background and tree locations, one coloured by crown condition and the other by trunk damage. It was necessary to correct an error in the data as one “y” instead of “Y”, before creating the map coloured by trunk damage. 
 To set up the data for graphs and analysis, we loaded a shape file entitled “gregtrees.shp”, provided  by Greg Baker from the Department of Geology at Saint Mary's University,  to use as a reference to change the coordinate system of the tree data and background to NAD83 which operates in units of meters. The distance for every tree from the nearest road based on the background street data and added the distances into the data frame in a new column was then noted. From there, we created a new column where we reassigned the crown condition value “G”  and “F” the number 1, and “P” the number 0. Similarly we created a column to assign trunk condition value “N” the number 1 and “Y” the value 0. We then reassigned the two new columns to a numeric structure. A graph was then created using the tree distances from the nearest road as the x-axis and the reassigned values for crown condition as the y-axis and coloured the points by original crown condition values. We then repeated this process using trunk damage for another graph. 
 Two proportion generalised linear models were then ran. Both models contained tree distance from the nearest road as the x value. However, one used the numerical values of crown condition as the x value, while the other used the  numerical values of trunk damage as the x value. Finally we conducted a Hosmer Lemeshow test for each of the models. 
 
 ## Results
-	The maps that were created showed tree conditions (crown condition and trunk damage) and where they were located along the Halifax waterfront. By looking at the map showing crown condition, the “G” meaning good crown condition, seems the most common (Figure 2). As for the map showing trunk damage, “N” meaning no damage, seems the most common (Figure 3). No other patterns are noted within these maps. 
+The maps that were created showed tree conditions (crown condition and trunk damage) and where they were located along the Halifax waterfront. By looking at the map showing crown condition, the “G” meaning good crown condition, seems the most common (Figure 2). As for the map showing trunk damage, “N” meaning no damage, seems the most common (Figure 3). No other patterns are noted within these maps. 
 
 
 ```{r, echo = FALSE, include = FALSE}
@@ -112,7 +112,7 @@ trees_wf_filtered$numerical_td <-as.numeric(trees_wf_filtered$numerical_td)
 ggplot(data = trees_wf_filtered, 
        aes(x = treedist1, y = numerical_cc, colour = crown_condition)) +
   geom_point() +
-  geom_smooth(method = "glm",se = FALSE, color = "black",
+  geom_smooth(method = "glm", se = FALSE, color = "black",
               method.args = list(family = "binomial")) +
   labs(x = "Distance from road (m)", y = "Crown condition", colour = "Crown Condition") +
   ggtitle ("Crown Condition") +
@@ -128,7 +128,7 @@ The results show that trees with no trunk damage, classified as “1”, are fou
 ```{r, echo=FALSE, include=TRUE}
 ggplot(data = trees_wf_filtered, 
        aes(x = treedist1, y = numerical_td, colour = trunk_damage)) +
-  geom_point() +
+  geom_point() + 
   geom_smooth(method = "glm", se = FALSE, color = "black",
               method.args = list(family = "binomial")) +
   labs(x = "Distance from road (m)", y = "Trunk damage", colour = "Trunk Damage") +
@@ -143,14 +143,29 @@ Figure 5: A plot recording trunk damage of trees found at the Halifax waterfront
 The Pr(>|z|) value, which represents the p-value for our parameter “treedist1” when using crown condition data, is 0.318 (Figure 6). When using “treedist1” with trunk damage data, the p-value is shown as 0.818 (Figure 7). 
 
 ![Figure 6: Data outputs from the generalized linear model comparing road distances to crown conditions of trees located on the Halifax waterfront](Summary_Crown_Condition.png)
+
+
+
+
 ![Figure 7: Data outputs from the generalized linear model comparing road distances to trunk damage of trees located on the Halifax waterfront](summary_trunk_damage.png)
+
 The Hosmer and Lemeshow test shows that for both crown condition and trunk damage of trees that the the values are insignificant. The values found by running these tests were 0.8545 and 0.01371, respectively (Figure 8; Figure 9). 
 
+
+
+
+
 ![Figure 8: Hosmer and Lemeshow test for crown conditions of trees compared to nearest distance from road](crown_condition_hosmer.png)
+
+
+
+
 ![Figure 9: Hosmer and Lemeshow test for crown conditions of trees compared to nearest distance from road](trunk_damage_hosmer.png)
 
 ## Discussion
 
 The data collected does not support our hypothesis that the health of a tree is related to it's distance from the nearest road. Both crown condition and trunk damage showed no correlation to the distance from the nearest road. These results could be affected by the fact that a large portion of the trees at the waterfront are in close proximity to the road. This means that there are not enough trees at a far distance from the road to make a meaningful comparison. If this analysis was repeated it would be be beneficial to regroup the data for crown condition to analyze "Good" separately from "Fair" and "Poor", rather than having "Good" and "Fair" together. This is because many of the trees were categorized as "Fair". Fair covers a wider range of crown conditions that could have potentially been a result of distance to the nearest road. Additionally, this analysis can be conducted by splitting the trees up into discrete groups based on their proximity to the nearest road, rather than analyze them on a continuous distance scale like we did. We also also could have analyzed information collected in the comment column such as diseased leaves or the presence of gulls in relation to road proximity. Finally, repeating this analysis with data collected from Saint Mary's University may have yielded different results due to the differences in the tree's spatial arrangement in relation to nearby roads. 
 
+## Conclusion
+In conclusion, the data analyzed did not support our hypothesis. What was learned from this project was that the scope of the data set may not have been large enough to distinguish any significant results. For future research, conducting an analysis between near-roads trees and trees 100’s of meters away from the nearest road, may show more of a significance.
 
